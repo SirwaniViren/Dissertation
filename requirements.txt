@@ -1,0 +1,8 @@
+jupyter
+matplotlib
+numpy
+scipy
+pandas
+nltk
+pymc3
+seaborn
