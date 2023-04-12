@@ -13,7 +13,12 @@ import graph_tool.all as gt
 # 1. Load dataset. Example with Elixauser comorbidity dataset.
 ##############################################################
 admissions = pd.read_csv("elixhauser_comorbidity_icd9_primary_secondary.csv")                                      # Loading dataset
-data_input = admissions[['hadm_id','16-24', '25-44', '45-64', 'F', 'M', 'cardiac_arrhythmias','valvular_disease']] # Get features I need, just some for example
+data_input = admissions[['hadm_id', '16-24', '25-44', '45-64', '65-84', 'over85', 'F', 'M' ,'ELECTIVE' , 'NON_ELECTIVE',
+                         'congestive_heart_failure', 'cardiac_arrhythmias' , 
+                         'valvular_disease', 'pulmonary_circulation', 'peripheral_vascular', 'hypertension', 'paralysis' , 'other_neurological', 
+                         'chronic_pulmonary' , 'diabetes_uncomplicated' , 'diabetes_complicated' , 'hypothyroidism' , 'renal_failure' , 'liver_disease', 
+                         'peptic_ulcer', 'aids', 'lymphoma', 'metastatic_cancer', 'solid_tumor', 'rheumatoid_arthritis', 'coagulopathy', 'obesity', 'weight_loss', 
+                         'fluid_electrolyte', 'blood_loss_anemia', 'deficiency_anemias', 'alcohol_abuse', 'drug_abuse', 'psychoses', 'depression']] # Get features I need, just some for example
 data_input.set_index("hadm_id",inplace=True) # I am setting the hadm_id as index. I use this later to define the observation nodes (patients in my case)
 
 # Need to replace the values in the columns for the column name to pass to make_graph function
@@ -47,13 +52,13 @@ model.fit(n_init = 10, verbose = False)  # fit the model 10 times and keep the b
 
 # multiflip mcmc sweep optimizes the results and updates the BlockState in the model object automatically.
 entropy=[model.state.multiflip_mcmc_sweep(beta=np.inf, niter=10) for i in range(1000)] # In this case we are runing the sweep 10 time with 1000 batches each
-model.save_model('hSBM_demogr_model')
-file = open('hSBM_demogr_model.pickle', 'rb')
+model.save_model('hSBM_full_demogr_model')
+file = open('hSBM_full_demogr_model.pickle', 'rb')
 model = pickle.load(file)
 print("Entropy after multiflip mcmc sweep: {0}".format(model.state.entropy()))         # To confirmed that the entropy has imporoved after runing the optimization
 
 
 #5. Visualize the results. This will display directly if run in a jupyter notebook, if not you can save the graph.
 model.state.draw(subsample_edges=6000,layout='bipartite',bip_aspect=1, hvertex_size=8, hedge_pen_width=1.9, output_size=(600, 600), 
-output="hSBM_demogr_bipartite_network.svg")
+output="hSBM_full_demogr_bipartite_network.svg")
 
