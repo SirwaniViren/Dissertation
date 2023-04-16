@@ -234,7 +234,7 @@ class sbmtm():
             for i_n_init in range(n_init):
                 base_type = gt.BlockState if not overlap else gt.OverlapBlockState
                 state_tmp = gt.minimize_nested_blockmodel_dl(g,
-                                                             state_args=dict(
+                                                             state_args=dict(deg_corr=False,
                                                                  base_type=base_type,
                                                                  **state_args),
                                                              multilevel_mcmc_args=dict(
