@@ -11,16 +11,15 @@ def heatmap(input_df, cluster_level):
         heatmap_df[c]=heatmap_df[c]/input_df[c].mean()-1
     heatmap_df=heatmap_df*100
     
-    plt.figure(figsize=(20,float(len(input_df[cluster_level].unique()))*1.5))
+    plt.figure(figsize=(20,float(len(input_df[cluster_level].unique()))*2.5))
     cmap=sns.diverging_palette(238, 12, l=60, s=100, as_cmap=True)
     sns.heatmap(heatmap_df, cbar_kws={'format': '%.0f%%', 'aspect':2.5}, vmax=500, cmap=cmap, center=0)
     plt.ylabel('Clusters')
-    plt.subplots_adjust(bottom=0.28)
-    plt.savefig("synth_no_deg_core_full_simple_heatmap_{}.pdf".format(cluster_level), format="pdf")
+    plt.subplots_adjust(bottom=0.2)
     plt.show()
     return
 
 
-df = pd.read_csv('synth_no_deg_core_full_simple_elixhauser_comorbidity.csv')
+df = pd.read_csv('no_deg_core_full_simple_elixhauser_comorbidity.csv')
 heatmap(df, 'cluster')
 
