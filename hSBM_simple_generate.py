@@ -29,8 +29,6 @@ nest_state = model.state
 lstate = nest_state.get_levels()[0]
 adj_matrix = gt.adjacency(g=lstate.get_bg(),weight=lstate.get_ers()).T
 synth_graph = gt.generate_sbm(b=lstate.b.a, probs=adj_matrix, 
-                            out_degs=lstate.g.degree_property_map("total").a,
-                            in_degs=lstate.g.degree_property_map("total").a,
                             directed=False)
 
 synth_nest_state = None

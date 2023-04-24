@@ -20,6 +20,6 @@ def heatmap(input_df, cluster_level):
     return
 
 
-df = pd.read_csv('no_deg_core_full_simple_elixhauser_comorbidity.csv')
+df = pd.read_csv('synth_no_deg_core_full_simple_elixhauser_comorbidity.csv')
 heatmap(df, 'cluster')
 

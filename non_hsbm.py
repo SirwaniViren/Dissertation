@@ -138,7 +138,7 @@ class non_hsbm():
             mdl = np.inf ##
             for i_n_init in range(n_init):
                 state_tmp = gt.minimize_blockmodel_dl(g,
-                                                      state_args=dict(deg_corr=False, 
+                                                      state_args=dict(deg_corr=True, B=2, 
                                                                       **state_args),
                                                                       multilevel_mcmc_args=dict(verbose=verbose))
                 # state_tmp = state_tmp.copy(sampling=True)

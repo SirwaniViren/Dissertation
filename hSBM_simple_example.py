@@ -50,7 +50,7 @@ model.fit(n_init = 10, verbose = False)  # fit the model 10 times and keep the b
 #########################
 
 # multiflip mcmc sweep optimizes the results and updates the BlockState in the model object automatically.
-entropy=[model.state.multiflip_mcmc_sweep(beta=np.inf, niter=10) for i in range(1000)] # In this case we are runing the sweep 10 time with 1000 batches each
+entropy=[model.state.multiflip_mcmc_sweep(beta=np.inf, niter=10) for i in range(10)] # In this case we are runing the sweep 10 time with 1000 batches each
 model.save_model('hSBM_no_deg_core_full_simple_model')
 file = open('hSBM_no_deg_core_full_simple_model.pickle', 'rb')
 model = pickle.load(file)
